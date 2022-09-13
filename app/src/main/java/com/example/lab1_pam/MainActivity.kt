@@ -2,11 +2,13 @@ package com.example.lab1_pam
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import androidx.appcompat.app.AlertDialog
 import com.example.lab1_pam.databinding.ActivityMainBinding
+import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -22,9 +24,19 @@ class MainActivity : AppCompatActivity() {
         else
             emptyField()
     }
+    private fun calculateOccurance(txt: String, ch: Char) : Int
+    {
+        val matcher = Pattern.compile(ch.toString()).matcher(txt)
+        var counter = 0
+        while (matcher.find()) {
+            counter++
+        }
+        return counter
+    }
     private fun showResult()
     {
-        val message = "Words with letter 'a': " + binding.txt1.text
+        val txt = binding.txt1.text.toString()
+        val message = "Words with letter 'a': " + calculateOccurance(txt, 'a')
         AlertDialog.Builder(this)
             .setTitle("Result")
             .setMessage(message)
