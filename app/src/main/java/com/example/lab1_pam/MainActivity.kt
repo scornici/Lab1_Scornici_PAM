@@ -27,11 +27,14 @@ class MainActivity : AppCompatActivity() {
     private fun calculateOccurance(txt: String, ch: Char) : Int
     {
         val matcher = Pattern.compile(ch.toString()).matcher(txt)
-        var counter = 0
-        while (matcher.find()) {
-            counter++
-        }
-        return counter
+        var word = 0
+        val strArray = txt.split(" ".toRegex()).toTypedArray()
+        for (s in strArray) {
+            if (s != "" && matcher.find()) {
+                word++
+            }
+    }
+        return word
     }
     private fun showResult()
     {
