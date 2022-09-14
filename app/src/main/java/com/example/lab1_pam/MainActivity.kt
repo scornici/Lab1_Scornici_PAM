@@ -2,7 +2,6 @@ package com.example.lab1_pam
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import androidx.appcompat.app.AlertDialog
 import com.example.lab1_pam.databinding.ActivityMainBinding
 import java.util.regex.Pattern
@@ -26,9 +25,9 @@ class MainActivity : AppCompatActivity() {
     }
     private fun calculateOccurance(txt: String, ch: Char) : Int
     {
+        val strArray = txt.split(" ".toRegex()).toTypedArray()
         val matcher = Pattern.compile(ch.toString()).matcher(txt)
         var word = 0
-        val strArray = txt.split(" ".toRegex()).toTypedArray()
         for (s in strArray) {
             if (s != "" && matcher.find()) {
                 word++
