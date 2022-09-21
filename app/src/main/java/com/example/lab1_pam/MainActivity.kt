@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.example.lab1_pam.databinding.ActivityMainBinding
-import java.util.regex.Pattern
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding;
@@ -23,13 +23,12 @@ class MainActivity : AppCompatActivity() {
         else
             emptyField()
     }
-    private fun calculateOccurance(txt: String, ch: Char) : Int
+    private fun calculateOccurance(txt: String) : Int
     {
         val strArray = txt.split(" ".toRegex()).toTypedArray()
-        val matcher = Pattern.compile(ch.toString()).matcher(txt)
         var word = 0
         for (s in strArray) {
-            if (s != "" && matcher.find()) {
+            if ("a" in s || "A" in s && s != "") {
                 word++
             }
     }
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private fun showResult()
     {
         val txt = binding.txt1.text.toString()
-        val message = "Words with letter 'a': " + calculateOccurance(txt, 'a')
+        val message = "Words with letter 'a': " + calculateOccurance(txt)
         AlertDialog.Builder(this)
             .setTitle("Result")
             .setMessage(message)
